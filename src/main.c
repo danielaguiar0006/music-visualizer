@@ -10,22 +10,26 @@ int main()
 
     bool showMessageBox = false;
 
-    while (!WindowShouldClose())
-    {
+    while (!WindowShouldClose()) {
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
-            ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
+        ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 
-            if (GuiButton((Rectangle){ 24, 24, 120, 30 }, "#191#Show Message")) showMessageBox = true;
+        if (GuiButton((Rectangle) { 24, 24, 120, 30 }, "#191#Show Message")) {
+            showMessageBox = true;
+            GuiLoadStyle("./styles/dark/style_dark.rgs");
+        }
 
-            if (showMessageBox)
-            {
-                int result = GuiMessageBox((Rectangle){ 85, 70, 250, 100 },
-                    "#191#Message Box", "Hi! This is a message!", "Nice;Cool");
+        if (showMessageBox) {
+            int result = GuiMessageBox((Rectangle) { 85, 70, 250, 100 },
+                "#191#Message Box", "Hi! This is a message!", "Nice;Cool");
 
-                if (result >= 0) showMessageBox = false;
+            if (result >= 0) {
+                GuiLoadStyle("./styles/terminal/style_terminal.rgs");
+                showMessageBox = false;
             }
+        }
 
         EndDrawing();
     }
